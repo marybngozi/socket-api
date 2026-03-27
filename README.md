@@ -77,11 +77,22 @@ export type ReportItem = z.infer<typeof ReportItemSchema>;
 
 This repository includes a **GitHub Action** that automatically publishes the `@marybngozi/socket-types` package to the GitHub Private Registry whenever a change is pushed to the `packages/socket-types` directory.
 
-### Publishing Flow:
+### ⚠️ Crucial: Versioning & Publishing
+GitHub Packages is an immutable registry. You cannot overwrite a version that has already been published (e.g., a 409 Conflict error).
 
-1.  Push changes to `main`.
-2.  Action triggers `npm publish`.
-3.  Package is updated at `https://npm.pkg.github.com/marybngozi`.
+**Automated Bumping**: Every time you push a change to the packages/socket-types directory, you must increase the version number in package.json following SemVer (Semantic Versioning) logic:
+
+**Patch (1.0.x)**: For tiny fixes or documentation (e.g., adding a non-required field to your Zod schema).
+
+**Minor (1.x.0)**: For new features that are backwards-compatible.
+
+**Major (x.0.0)**: For Breaking Changes where the Frontend codebase must be updated to avoid crashing.
+
+### Publishing Flow:
+1. Increase version in packages/socket-types/package.json.
+2.  Push changes to `main`.
+3.  Action triggers `npm publish`.
+4.  Package is updated at `https://npm.pkg.github.com/marybngozi`.
 
 -----
 
