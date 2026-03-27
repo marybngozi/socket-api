@@ -1,8 +1,12 @@
 name: Publish Types to GitHub
 on:
   push:
-    paths: ['packages/api-types/**']
+    paths: ['packages/socket-types/**']
     branches: [main]
+
+defaults:
+  run:
+    working-directory: packages/socket-types
 
 jobs:
   publish:
@@ -22,7 +26,7 @@ jobs:
 
       - name: Install & Build
         run: |
-          cd packages/api-types
+          cd packages/socket-types
           npm install
           npm run build
         # 🟢 Pass the token here for the install phase
@@ -31,7 +35,7 @@ jobs:
 
       - name: Publish Package
         run: |
-          cd packages/api-types
+          cd packages/socket-types
           # 🟢 Point to the registry explicitly one last time
           npm publish --registry=https://npm.pkg.github.com
         # 🟢 Pass the token here for the publish phase

@@ -13,7 +13,7 @@ To define our data structures **once** in the API and share them across the enti
 ```text
 socket-api/
 ├── packages/
-│   └── api-types/      <-- THE CONTRACT (Shared Library)
+│   └── socket-types/      <-- THE CONTRACT (Shared Library)
 │       ├── src/index.ts
 │       └── src/report.ts
 ├── server.ts           <-- THE ENGINE (Express Server)
@@ -30,7 +30,7 @@ socket-api/
 The library must be built into JavaScript before it can be linked or used by the server.
 
 ```bash
-cd packages/api-types
+cd packages/socket-types
 npm install
 npm run build
 npm link
@@ -52,7 +52,7 @@ The server will be running at [http://localhost:3001](https://www.google.com/sea
 
 ## 🏗️ How the "Contract" Works
 
-### 1\. Zod Schemas (`packages/api-types/src/report.ts`)
+### 1\. Zod Schemas (`packages/socket-types/src/report.ts`)
 
 We use **Zod** to define our schemas. This allows us to perform **Runtime Validation** on the Backend:
 
@@ -63,7 +63,7 @@ if (!result.success) {
 }
 ```
 
-### 2\. Inferred Types (`packages/api-types/src/index.ts`)
+### 2\. Inferred Types (`packages/socket-types/src/index.ts`)
 
 We "Export" the TypeScript types automatically from those schemas so the Frontend doesn't have to manually create interfaces:
 
@@ -75,7 +75,7 @@ export type ReportItem = z.infer<typeof ReportItemSchema>;
 
 ## 📡 Remote Deployment (CI/CD)
 
-This repository includes a **GitHub Action** that automatically publishes the `@marybngozi/socket-types` package to the GitHub Private Registry whenever a change is pushed to the `packages/api-types` directory.
+This repository includes a **GitHub Action** that automatically publishes the `@marybngozi/socket-types` package to the GitHub Private Registry whenever a change is pushed to the `packages/socket-types` directory.
 
 ### Publishing Flow:
 
