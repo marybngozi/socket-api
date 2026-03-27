@@ -1,4 +1,5 @@
 name: Publish Types to GitHub
+
 on:
   push:
     paths: ['packages/socket-types/**']
@@ -13,31 +14,25 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write # 👈 Crucial for the GITHUB_TOKEN to have permission
+      packages: write
+
     steps:
       - uses: actions/checkout@v4
       
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-          # 🟢 This tells GitHub to set up the auth for you automatically
           registry-url: 'https://npm.pkg.github.com'
           scope: '@marybngozi'
 
       - name: Install & Build
         run: |
-          cd packages/socket-types
-          npm install
+          npm ci
           npm run build
-        # 🟢 Pass the token here for the install phase
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish Package
-        run: |
-          cd packages/socket-types
-          # 🟢 Point to the registry explicitly one last time
-          npm publish --registry=https://npm.pkg.github.com
-        # 🟢 Pass the token here for the publish phase
+        run: npm publish --registry=https://npm.pkg.github.com
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
