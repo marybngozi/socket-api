@@ -9,23 +9,31 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: write
+      packages: write # 👈 Crucial for the GITHUB_TOKEN to have permission
     steps:
       - uses: actions/checkout@v4
+      
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          # 🟢 This tells GitHub to set up the auth for you automatically
           registry-url: 'https://npm.pkg.github.com'
+          scope: '@marybngozi'
+
       - name: Install & Build
         run: |
           cd packages/api-types
-          
-          # 🟢 Create a temporary .npmrc in this specific folder
-          echo "@marybngozi:registry=https://npm.pkg.github.com" > .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> .npmrc
-
           npm install
           npm run build
-          npm publish
+        # 🟢 Pass the token here for the install phase
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish Package
+        run: |
+          cd packages/api-types
+          # 🟢 Point to the registry explicitly one last time
+          npm publish --registry=https://npm.pkg.github.com
+        # 🟢 Pass the token here for the publish phase
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

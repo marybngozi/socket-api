@@ -5,6 +5,7 @@ export const ChartTypeSchema = z.enum([
   "pie-chart", 
   "line-chart", 
   "area-chart", 
+  "scatter-chart", 
   "none"
 ]);
 
