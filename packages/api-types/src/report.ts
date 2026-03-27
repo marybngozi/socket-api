@@ -4,13 +4,14 @@ export const ChartTypeSchema = z.enum([
   "bar-chart", 
   "pie-chart", 
   "line-chart", 
+  "area-chart", 
   "none"
 ]);
 
 export const ReportItemSchema = z.object({
   id: z.string(),
   name: z.string(),
-  chartType: z.enum(["bar-chart", "pie-chart", "none"]),
+  chartType: ChartTypeSchema,
   properties: z.object({
     label: z.string(),
     subtitle: z.string().optional(),
