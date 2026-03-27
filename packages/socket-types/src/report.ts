@@ -6,9 +6,11 @@ export const ChartTypeSchema = z.enum([
   "line-chart", 
   "area-chart", 
   "scatter-chart", 
+  "donut-chart",
   "none"
 ]);
 
+// report item type
 export const ReportItemSchema = z.object({
   id: z.string(),
   name: z.string(),
