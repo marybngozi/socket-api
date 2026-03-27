@@ -1,0 +1,12 @@
+{
+  "name": "@socket/api-types",
+  "version": "1.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build-dev": "tsc --watch"
+  },
+  "devDependencies": { "typescript": "^5.0.0" },
+  "dependencies": { "zod": "^3.22.0" }
+}

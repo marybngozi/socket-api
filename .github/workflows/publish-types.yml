@@ -1,0 +1,29 @@
+name: Publish Types to GitHub
+on:
+  push:
+    paths: ['packages/api-types/**']
+    branches: [main]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+      - name: Install & Build
+        run: |
+          cd packages/api-types
+          npm install
+          npm run build
+      - name: Publish
+        run: |
+          cd packages/api-types
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
