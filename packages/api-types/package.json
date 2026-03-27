@@ -1,11 +1,17 @@
 {
-  "name": "@socket/api-types",
+  "name": "@marybngozi/socket-types",
   "version": "1.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marybngozi/socket-api.git"
+  },
   "scripts": {
-    "build": "tsc",
-    "build-dev": "tsc --watch"
+    "build": "tsc"
   },
   "devDependencies": { "typescript": "^5.0.0" },
   "dependencies": { "zod": "^3.22.0" }

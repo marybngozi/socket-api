@@ -4,7 +4,7 @@ This repository houses the Backend logic and the shared architectural "Contract"
 
 ## 🚀 The Goal
 
-To define our data structures **once** in the API and share them across the entire stack. This repo uses **NPM Workspaces** to manage the `@socket/api-types` library alongside the Express server.
+To define our data structures **once** in the API and share them across the entire stack. This repo uses **NPM Workspaces** to manage the `@marybngozi/socket-types` library alongside the Express server.
 
 -----
 
@@ -75,7 +75,7 @@ export type ReportItem = z.infer<typeof ReportItemSchema>;
 
 ## 📡 Remote Deployment (CI/CD)
 
-This repository includes a **GitHub Action** that automatically publishes the `@socket/api-types` package to the GitHub Private Registry whenever a change is pushed to the `packages/api-types` directory.
+This repository includes a **GitHub Action** that automatically publishes the `@marybngozi/socket-types` package to the GitHub Private Registry whenever a change is pushed to the `packages/api-types` directory.
 
 ### Publishing Flow:
 

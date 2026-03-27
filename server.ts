@@ -1,5 +1,5 @@
 import express from 'express';
-import { ReportItemSchema } from '@socket/api-types';
+import { ReportItemSchema } from '@marybngozi/socket-types';
 
 const app = express();
 app.use(express.json());
